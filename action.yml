@@ -20,6 +20,11 @@ inputs:
     description: 'Should release a new version?'
     required: false
     default: 'false'
+
+  should_update_release:
+    description: 'Should update an existing GitHub release?'
+    required: false
+    default: 'false'
   
   version_name:
     description: 'Version name of the upcoming release'
@@ -110,3 +115,4 @@ runs:
     - ${{ inputs.slack_channel_id }}
     - ${{ inputs.slack_webhook_id }}
     - ${{ inputs.title_observer_section }}
+    - ${{ inputs.should_update_release }}
