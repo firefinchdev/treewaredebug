@@ -9,11 +9,18 @@ prerelease=$6
 is_draft=$7
 extra_release_note=$8
 is_beta=$9
+should_update_release=${10}
+
+if [ "$should_update_release" = true ]; then
+  command="hub release edit"
+else
+  command="hub release create"
+fi
 
 if [ "$is_beta" = true ] ; then
-  command="hub release create --message \"Beta $version_name\" --message \"$changelogs\""
+  command="$command --message \"Beta $version_name\" --message \"$changelogs\""
 else
-  command="hub release create --message \"Release $version_name\" --message \"$changelogs\""
+  command="$command --message \"Release $version_name\" --message \"$changelogs\""
 fi
 
 # Adding extra note

@@ -17,6 +17,7 @@ slack_workspace_id=${12}
 slack_channel_id=${13}
 slack_webhook_id=${14}
 title_observer_section=${15}
+should_update_release=${16}
 
 token=$GITHUB_TOKEN
 repo_name=$GITHUB_REPOSITORY
@@ -47,9 +48,9 @@ else
   content="${content//$'\r'/'%0D'}"
   echo "::set-output name=changelogs::$content"
 
-  if [ "$should_release" = true ] ; then
+  if [ "$should_release" = true ] || [ "$should_update_release" = true ]; then
     # creates a release on GitHub with the version name as tag
-    bash /release.sh "$token" "$version_name" "$changelogs" "$assets" "$target_commitish" "$is_prerelease" "$is_draft" "$extra_release_note" "$is_beta"
+    bash /release.sh "$token" "$version_name" "$changelogs" "$assets" "$target_commitish" "$is_prerelease" "$is_draft" "$extra_release_note" "$is_beta" "$should_update_release"
 
     # communicate the changelog to the specified slack webhook
     if [[ ${#slack_workspace_id} != 0 && ${#slack_channel_id} != 0 && ${#slack_webhook_id} != 0 ]]; then
