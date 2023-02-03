@@ -32,7 +32,10 @@ if [ "$is_beta" = true ] ; then
   branch=$beta_branch
 fi
 
-changelogs=$(python3 /treeware_main.py "$token" "$repo_name" "$branch" "$is_beta" "$drafter_path" "$title_observer_section")
+changelogs=""
+if [ "$should_update_release" = false ]; then
+    changelogs=$(python3 /treeware_main.py "$token" "$repo_name" "$branch" "$is_beta" "$drafter_path" "$title_observer_section")
+fi
 echo "$changelogs"
 
 isSuccess=$(echo "$changelogs" | cut -d " " -f1)

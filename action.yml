@@ -83,7 +83,7 @@ inputs:
 
 outputs:
   changelogs:
-    description: 'Categorized changelogs based on labels'
+    description: 'Categorized changelogs based on labels, value present only if should_update_release is false'
 
   upload_url:
     description: 'The assets upload URL to the GitHub release'
