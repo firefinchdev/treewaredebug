@@ -35,7 +35,7 @@ fi
 
 changelogs=""
 if [ "$should_update_release" = false ]; then
-    changelogs=$(python3 /treeware_main.py "$token" "$repo_name" "$branch" "$is_beta" "$drafter_path" "$title_observer_section")
+    changelogs="changelog$should_update_release"
 fi
 echo "$changelogs"
 
