@@ -17,15 +17,19 @@ else
   command="hub release create"
 fi
 
-if [ "$is_beta" = true ] ; then
-  command="$command --message \"Beta $version_name\" --message \"$changelogs\""
+if [ "$should_update_release" = true ]; then
+  command="$command --message \"\""
 else
-  command="$command --message \"Release $version_name\" --message \"$changelogs\""
-fi
+  if [ "$is_beta" = true ] ; then
+    command="$command --message \"Beta $version_name\" --message \"$changelogs\""
+  else
+    command="$command --message \"Release $version_name\" --message \"$changelogs\""
+  fi
 
-# Adding extra note
-if [ ${#extra_release_note} != 0 ]; then
-  command="$command --message \"> $extra_release_note\""
+  # Adding extra note
+  if [ ${#extra_release_note} != 0 ]; then
+    command="$command --message \"> $extra_release_note\""
+  fi
 fi
 
 # if it's a draft
